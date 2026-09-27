@@ -63,7 +63,7 @@
 
   <p class="redirect-fallback">
     Not redirected?
-    <a id="redirect-link" href="https://example.com">
+    <a id="redirect-link" href="#">
       Click here
     </a>
   </p>
@@ -80,17 +80,46 @@
   <script>
     /*
      * =========================================================
-     * REDIRECT CONFIGURATION
-     * Replace this URL when you're ready.
+     * DOVIN REDIRECT CONFIG
+     * =========================================================
+     *
+     * Put a destination URL here when one exists.
+     *
+     * If this is empty, null, undefined, or only whitespace,
+     * the Worker fallback will automatically be used.
+     */
+
+    const CONFIGURED_DESTINATION = "";
+
+    const FALLBACK_DESTINATION =
+      "https://dovin.odd-wave-c130.workers.dev";
+
+
+    /*
+     * =========================================================
+     * DESTINATION CHECK
      * =========================================================
      */
-    const REDIRECT_URL = "https://example.com";
+
+    const destination =
+      typeof CONFIGURED_DESTINATION === "string" &&
+      CONFIGURED_DESTINATION.trim() !== ""
+        ? CONFIGURED_DESTINATION.trim()
+        : FALLBACK_DESTINATION;
+
+
+    /*
+     * =========================================================
+     * REDIRECT
+     * =========================================================
+     */
 
     const countdown = document.getElementById("countdown");
     const redirectLink = document.getElementById("redirect-link");
     const progressBar = document.getElementById("redirect-progress-bar");
 
-    redirectLink.href = REDIRECT_URL;
+    // Make the fallback link point to the actual destination.
+    redirectLink.href = destination;
 
     let seconds = 3;
 
@@ -104,7 +133,8 @@
 
       if (seconds <= 0) {
         clearInterval(interval);
-        window.location.href = REDIRECT_URL;
+
+        window.location.href = destination;
       }
     }, 1000);
   </script>
