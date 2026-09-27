@@ -1,0 +1,113 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Dovin — Redirecting</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://ipv4.kesug.com/css/style.css" />
+  <link rel="stylesheet" href="https://ipv4.kesug.com/css/redirect.css" />
+</head>
+
+<body>
+
+  <nav class="site-nav">
+    <div class="wrap">
+      <ul class="nav-links" data-nav-links>
+        <li><a href="javascript:history.back()">Back</a></li>
+        <li><a href="/about/index.html">About</a></li>
+        <li><a href="/advertise/index.html">Advertise</a></li>
+        <li><a href="/links/index.html">Link Dispenser</a></li>
+      </ul>
+
+```
+  <img class="nav-brand-logo" data-nav-logo src="" alt="" />
+
+  <button
+    class="nav-toggle"
+    data-nav-toggle
+    aria-label="Toggle menu"
+    aria-expanded="false"
+  >
+    <span></span>
+  </button>
+</div>
+```
+
+  </nav>
+
+  <main class="redirect-shell">
+    <section class="redirect-panel" aria-live="polite">
+
+```
+  <div class="redirect-mark" aria-hidden="true">
+    →
+  </div>
+
+  <h1>Redirecting you</h1>
+
+  <p class="redirect-sub">
+    You’ll be redirected in
+    <span id="countdown">3</span>
+    seconds.
+  </p>
+
+  <div class="redirect-progress" aria-hidden="true">
+    <div id="redirect-progress-bar"></div>
+  </div>
+
+  <p class="redirect-fallback">
+    Not redirected?
+    <a id="redirect-link" href="https://example.com">
+      Click here
+    </a>
+  </p>
+
+</section>
+```
+
+  </main>
+
+  <script src="https://ipv4.kesug.com/js/config.js"></script>
+
+  <script src="https://ipv4.kesug.com/js/main.js"></script>
+
+  <script>
+    /*
+     * =========================================================
+     * REDIRECT CONFIGURATION
+     * Replace this URL when you're ready.
+     * =========================================================
+     */
+    const REDIRECT_URL = "https://example.com";
+
+    const countdown = document.getElementById("countdown");
+    const redirectLink = document.getElementById("redirect-link");
+    const progressBar = document.getElementById("redirect-progress-bar");
+
+    redirectLink.href = REDIRECT_URL;
+
+    let seconds = 3;
+
+    const interval = setInterval(() => {
+      seconds--;
+
+      countdown.textContent = seconds;
+
+      const progress = ((3 - seconds) / 3) * 100;
+      progressBar.style.width = `${progress}%`;
+
+      if (seconds <= 0) {
+        clearInterval(interval);
+        window.location.href = REDIRECT_URL;
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>
